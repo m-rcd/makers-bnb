@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Makers BnB</title>
+</head>
+<body>
+  <h1> Welcome to Makers Bnb </h1>
+
+  <ul class="spaces">
+    <% for(var i=0; i<spaces.length; i++) {%>
+      <li class="spaces">
+        <span><%= spaces[i].name %></span>
+        <span><%= spaces[i].description %></span>
+        <span><%= spaces[i].price %></span>
+
+      </li>
+    <% } %>
+  </ul>
+  <form action="/space" method="get">
+    <button type="submit">List a space</button>
+</form>
+</body>
+</html>
