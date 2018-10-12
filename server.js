@@ -2,9 +2,11 @@ const express = require('express');
 const bodyParser= require('body-parser');
 const app = express();
 const MongoClient = require('mongodb').MongoClient
+const session = require('express-session')
 
 app.set('view engine', 'ejs')
 app.use(bodyParser.urlencoded({extended: true}))
+app.use(session({ secret: 'this-is-secretive-shhhh' }));
 var db
 
 MongoClient.connect('mongodb://bnbuser:makersbnb1@ds255588.mlab.com:55588/makersbnb', (err, client) => {
@@ -16,9 +18,10 @@ MongoClient.connect('mongodb://bnbuser:makersbnb1@ds255588.mlab.com:55588/makers
 })
 
 app.get('/', (req, res) => {
+  const sessionUsername = req.session.username
   db.collection('spaces').find().toArray((err, result) => {
     if (err) return console.log(err)
-    res.render('index.ejs', {spaces: result})
+    res.render('index.ejs', {spaces: result, username: sessionUsername})
   })
 })
 
@@ -42,6 +45,16 @@ app.post('/signup', (req, res) => {
   db.collection('users').save(req.body, (err, result) => {
     if (err) return console.log(err)
     console.log('saved to database')
+    req.session.username = req.body.username
     res.redirect('/')
   })
+})
+
+app.get('/login', (req, res) => {
+  res.sendFile(__dirname + '/login.html')
+})
+
+app.post('/login', (req, res) => {
+  req.session.username = req.body.username
+  res.redirect('/')
 })
