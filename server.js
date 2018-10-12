@@ -38,7 +38,7 @@ app.post('/space', (req, res) => {
 })
 
 app.get('/signup', (req, res) => {
-  res.sendFile(__dirname + '/signup.html')
+  res.sendFile(__dirname + '/views/signup.ejs')
 })
 
 app.post('/signup', (req, res) => {

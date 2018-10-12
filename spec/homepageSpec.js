@@ -1,15 +1,19 @@
 const Browser = require('zombie');
 
-Browser.localhost('example.com', 3000);
+Browser.localhost('localhost', 3000);
 
 describe('User can visit homepage', function() {
-  const Browser = new Browser();
+  const browser = new Browser();
 
-  before(function(done) {
-    browser.visit('/',done);
+  beforeEach((done) => {
+    browser.visit('/', done);
+  });
+
+  it('should be successful', function() {
+    browser.assert.success()
   });
 
   it('should see welcome page', function() {
-    browser.assert.text('title', 'Welcome to Makers Bnb')
+    browser.assert.text('h1', 'Welcome to Makers Bnb')
   });
 });
