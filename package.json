@@ -1,8 +1,7 @@
-{
+{ "main": "server.js",
   "scripts": {
     "lint": "eslint src/ spec/",
-    "test": "node_modules/jasmine-node/bin/jasmine-node spec/ --verbose",
-    "dev": "nodemon"
+    "test": "node_modules/jasmine-node/bin/jasmine-node spec/ --verbose"
   },
   "author": "",
   "license": "ISC",

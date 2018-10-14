@@ -1,36 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Makers BnB</title>
-</head>
-<body>
-  <h1> Welcome to Makers Bnb </h1>
-  <% if (username) { %>
-  <h1> Hello, <%= username %> </h1>
-  <% } %>
-<% if (!username)  {%>
-<form action="/space" method="get">
-    <button type="submit">List a space</button>
-</form>
-<%  }%>
-<form action="/login" method="get">
-<button type="submit">Log in</button>
-</form>
-<form action="/signup" method="get">
-  <button type="submit">Sign up</button>
-</form>
-  <% if (username) { %>
-<button type="submit">Sign out</button>
-  <% } %>
-<ul class="spaces">
-  <% for(var i=0; i<spaces.length; i++) {%>
-    <li class="spaces">
-      <span><%= spaces[i].name %></span>
-      <span><%= spaces[i].description %></span>
-      <span><%= spaces[i].price %></span>
-    </li>
-  <% } %>
-</ul>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <title>Makers BnB</title>
+  </head>
+
+  <body>
+    <h1> Welcome to Makers Bnb </h1>
+    <% if (username) { %>
+      <h1> Hello, <%= username %> </h1>
+      <form action="/space" method="get">
+          <button type="submit">List a space</button>
+      </form>
+      <form action="/signout" method="get">
+        <button type="submit">Sign out</button>
+      </form>
+    <%  } %>
+
+    <% if (!username){ %>
+      <form action="/login" method="get">
+      <button type="submit">Log in</button>
+      </form>
+      <form action="/signup" method="get">
+        <button type="submit">Sign up</button>
+      </form>
+    <%  } %>
+    <h1> Listings</h1>
+    <ul class="spaces">
+      <% for(var i=0; i<spaces.length; i++) {%>
+        <li class="spaces">
+          <span><%= spaces[i].name %></span>
+          <span><%= spaces[i].description %></span>
+          <span><%= spaces[i].price %></span>
+        </li>
+      <% } %>
+    </ul>
+  </body>
 </html>

@@ -9,7 +9,8 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(session({ secret: 'this-is-secretive-shhhh' }));
 var db
 
-MongoClient.connect('mongodb://bnbuser:makersbnb1@ds255588.mlab.com:55588/makersbnb', (err, client) => {
+MongoClient.connect('mongodb://bnbuser:makersbnb1@ds255588.mlab.com:55588/makersbnb', {useNewUrlParser: true}, (err, client)  => {
+
   if (err) return console.log(err)
   db = client.db('makersbnb')
   app.listen(3000, function() {
@@ -57,4 +58,9 @@ app.get('/login', (req, res) => {
 app.post('/login', (req, res) => {
   req.session.username = req.body.username
   res.redirect('/')
+})
+
+app.get('/signout', (req, res) => {
+  req.session.username = ''
+  res.render(__dirname + '/views/logout.ejs')
 })
